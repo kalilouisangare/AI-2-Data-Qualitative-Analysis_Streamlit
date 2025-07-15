@@ -25,7 +25,7 @@ Suivez ces étapes pour configurer l'environnement et lancer le projet.
 ### 2. Cloner le Dépôt
 
 ```bash
-git clone <[URL_DU_DEPOT](https://github.com/kalilouisangare/AI-2-Data-Qualitative-Analysis.git)>
+git clone <https://github.com/kalilouisangare/AI-2-Data-Qualitative-Analysis.git>
 cd analyse_qualitative
 ```
 
