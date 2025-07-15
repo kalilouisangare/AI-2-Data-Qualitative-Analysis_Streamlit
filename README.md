@@ -1,6 +1,4 @@
----
-
-# Feuille de Route Stratégique et Technique
+---# Feuille de Route Stratégique et Technique
 
 * **Projet** : Quali-IA : Plateforme d'Analyse Qualitative Intelligente
 * **Auteur** : Kalilou I Sangare
