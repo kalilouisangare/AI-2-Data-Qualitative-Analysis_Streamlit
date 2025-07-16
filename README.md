@@ -1,6 +1,3 @@
-
----
-
 # Projet d'Analyse Qualitative Automatisée
 
 Cet outil permet de réaliser une analyse qualitative complète sur des documents texte ou des fichiers audio. Il automatise les tâches de transcription, traduction, résumé, et permet de poser des questions directement sur le contenu de vos documents.
@@ -58,12 +55,54 @@ python download_model.py
 
 ## 📖 Mode d'emploi
 
-1.  **Ajouter vos données** : Placez tous vos fichiers (par exemple `.wav`, `.mp3`, `.txt`, `.docx`) dans le dossier `data/`.
-2.  **Lancer l'analyse** : Exécutez le script principal pour démarrer le traitement.
+Cet outil peut être lancé de deux manières : via une interface web conviviale ou en ligne de commande.
+
+### Interface Web (Recommandé)
+
+1.  **Lancer le serveur** : Exécutez le script `backend.py` pour démarrer le serveur web local.
     ```bash
-    python run.py
+    python backend.py
+    ```
+2.  **Accéder à l'application** : Ouvrez votre navigateur et rendez-vous à l'adresse suivante pour utiliser l'interface interactive.
+    [http://127.0.0.1:7860/](http://127.0.0.1:7860/)
+
+### Ligne de Commande
+
+1.  **Ajouter vos données** : Placez tous vos fichiers (par exemple `.wav`, `.mp3`, `.txt`, `.docx`) dans le dossier `data/`.
+2.  **Lancer l'analyse** : Exécutez le script `main.py` pour démarrer le traitement.
+    ```bash
+    python main.py
     ```
 3.  **Consulter les résultats** : Une fois l'analyse terminée, les résultats seront compilés dans le fichier `export.docx`.
+
+## 🔧 Configuration des Modèles
+
+Cet outil peut être configuré pour utiliser des modèles de langage locaux via **Ollama** ou des API externes comme **Gemini** et **OpenAI**.
+
+### Utilisation avec Ollama (Local)
+
+Pour une utilisation en local, sans dépendre d'une connexion Internet pour l'analyse de texte :
+
+1.  **Installez Ollama** : Suivez les instructions sur [ollama.ai](https://ollama.ai/) pour l'installer sur votre système.
+2.  **Téléchargez un modèle** : Choisissez un modèle adapté à vos besoins (par exemple, `llama2`, `mistral`).
+    ```bash
+    ollama pull mistral
+    ```
+3.  **Configurez l'outil** : Assurez-vous que vos scripts (par exemple `qa_service.py`) sont configurés pour utiliser Ollama comme fournisseur de modèle.
+
+### Utilisation avec les API (Gemini et OpenAI)
+
+Pour utiliser des modèles plus puissants via leurs API :
+
+1.  **Obtenez vos clés d'API** :
+    *   **Gemini** : Créez un projet sur [Google AI Studio](https://aistudio.google.com/) et récupérez votre clé d'API.
+    *   **OpenAI** : Accédez à votre compte sur [platform.openai.com](https://platform.openai.com/) et générez une clé d'API.
+2.  **Configurez les variables d'environnement** : Pour des raisons de sécurité, ne codez pas vos clés en dur. Créez un fichier `.env` à la racine du projet et ajoutez-y vos clés :
+    ```
+    GEMINI_API_KEY="VOTRE_CLÉ_GEMINI"
+    OPENAI_API_KEY="VOTRE_CLÉ_OPENAI"
+    ```
+3.  **Adaptez le code** : Modifiez les services correspondants (par exemple `qa_service.py`, `summarization_service.py`) pour qu'ils utilisent la bibliothèque du fournisseur d'API souhaité (par exemple, `google-generativeai` pour Gemini, `openai` pour OpenAI).
 
 ## 📂 Structure du Projet
 
@@ -80,6 +119,3 @@ python download_model.py
 ## 📄 Licence
 
 Ce projet est distribué sous la licence spécifiée dans le fichier `LICENSE.txt`.
-
-
----
