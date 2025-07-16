@@ -1,0 +1,28 @@
+fastapi
+uvicorn[standard]
+streamlit
+python-dotenv
+# Pour lire les fichiers
+pandas
+openpyxl
+python-docx
+# Pour l'IA locale (Hugging Face)
+transformers
+torch
+accelerate
+sentencepiece # Requis pour NLLB
+# Pour la transcription audio
+ffmpeg-python
+# Pour appeler les API externes
+google-generativeai
+openai
+anthropic
+# Pour appeler Ollama
+requests
+soundfile
+wordcloud
+matplotlib
+Pillow
+spacy # pour la semantique et la commande python -m spacy download fr_core_news_sm 
+PyMuPDF
+pyinstaller # Pour l'installateur exe de windows
