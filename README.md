@@ -14,7 +14,7 @@ Cet outil permet de réaliser une analyse qualitative complète sur des document
 
 Suivez ces étapes pour configurer l'environnement et lancer le projet.
 
-### 1. Prérequis
+### 1. Prérequis 
 
 *   [Python 3.8+](https://www.python.org/)
 *   [Git](https://git-scm.com/)
