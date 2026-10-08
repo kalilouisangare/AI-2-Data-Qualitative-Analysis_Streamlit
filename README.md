@@ -2,120 +2,94 @@
 
 Cet outil permet de réaliser une analyse qualitative complète sur des documents texte ou des fichiers audio. Il automatise les tâches de transcription, traduction, résumé, et permet de poser des questions directement sur le contenu de vos documents.
 
+**Architecture** : backend **FastAPI** (API, port 8000) + interface web **Streamlit** (port 8501).
+
 ## ✨ Fonctionnalités
 
-*   **Transcription Audio** : Convertit les fichiers audio en texte.
-*   **Traduction** : Traduit le contenu textuel dans la langue de votre choix.
-*   **Résumé Automatique** : Génère des résumés concis de longs documents.
-*   **Questions & Réponses (QA)** : Obtenez des réponses précises à vos questions basées sur les documents fournis.
-*   **Synthèse Vocale (TTS)** : Convertit le texte des résultats en fichier audio.
+- **Transcription Audio** : Convertit les fichiers audio en texte.
+- **Traduction** : Traduit le contenu textuel dans la langue de votre choix.
+- **Résumé Automatique** : Génère des résumés concis de longs documents.
+- **Questions & Réponses (QA)** : Obtenez des réponses précises à vos questions basées sur les documents fournis.
+- **Synthèse Vocale (TTS)** : Convertit le texte des résultats en fichier audio.
 
 ## 🚀 Installation
 
-Suivez ces étapes pour configurer l'environnement et lancer le projet.
+### 1. Prérequis
+- [Python 3.8+](https://www.python.org/)
+- [Git](https://git-scm.com/)
 
-### 1. Prérequis 
-
-*   [Python 3.8+](https://www.python.org/)
-*   [Git](https://git-scm.com/)
-
-### 2. Cloner le Dépôt
-
+### 2. Cloner le dépôt
 ```bash
 git clone https://github.com/kalilouisangare/AI-2-Data-Qualitative-Analysis_Streamlit
 cd AI-2-Data-Qualitative-Analysis_Streamlit
 ```
 
-### 3. Créer et Activer l'Environnement Virtuel
-
-*   **Windows** :
-    ```bash
-    python -m venv venv
-    .\venv\Scripts\activate
-    ```
-*   **macOS / Linux** :
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
-
-### 4. Installer les Dépendances
-
-Assurez-vous que votre environnement virtuel est activé avant de lancer cette commande.
+### 3. Créer et activer l'environnement virtuel
+- **Windows** :
 ```bash
-pip install -r requirements.txt
+python -m venv venv
+.\venv\Scripts\activate
+```
+- **macOS / Linux** :
+```bash
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-### 5. Télécharger le Modèle
-
-Un modèle de langue est nécessaire pour l'analyse. Exécutez le script suivant pour le télécharger :
+### 4. Installer les dépendances
 ```bash
-python download_model.py
+pip install -r requirements_streamlit.txt
 ```
 
-## 📖 Mode d'emploi
+### 5. Configurer les clés API
+```bash
+cp .env.exemple .env
+```
+Puis renseignez vos clés dans `.env` (jamais versionné, voir `.gitignore`).
 
-Cet outil peut être lancé de deux manières : via une interface web conviviale ou en ligne de commande.
+## 📖 Lancement
 
-### Interface Web (Recommandé)
+```bash
+python run_streamlit.py
+```
 
-1.  **Lancer le serveur** : Exécutez le script `backend.py` pour démarrer le serveur web local.
-    ```bash
-    python backend.py
-    ```
-2.  **Accéder à l'application** : Ouvrez votre navigateur et rendez-vous à l'adresse suivante pour utiliser l'interface interactive.
-    [http://127.0.0.1:7860/](http://127.0.0.1:7860/)
+Ce script démarre :
+1. le **backend FastAPI** sur [http://127.0.0.1:8000](http://127.0.0.1:8000) (API)
+2. l'**interface Streamlit** sur [http://localhost:8501](http://localhost:8501) — ouvrez cette adresse dans votre navigateur
 
-### Ligne de Commande
+## 🔧 Configuration des modèles
 
-1.  **Ajouter vos données** : Placez tous vos fichiers (par exemple `.wav`, `.mp3`, `.txt`, `.docx`) dans le dossier `data/`.
-2.  **Lancer l'analyse** : Exécutez le script `main.py` pour démarrer le traitement.
-    ```bash
-    python main.py
-    ```
-3.  **Consulter les résultats** : Une fois l'analyse terminée, les résultats seront compilés dans le fichier `export.docx`.
+Outil configurable avec des LLM **locaux via Ollama** (usage hors ligne) ou des **API externes** (Gemini, OpenAI).
 
-## 🔧 Configuration des Modèles
+### Ollama (local, sans Internet)
+1. Installez Ollama sur [ollama.ai](https://ollama.ai/)
+2. Téléchargez un modèle : `ollama pull mistral`
+3. Sélectionnez Ollama comme fournisseur dans la configuration
 
-Cet outil peut être configuré pour utiliser des modèles de langage locaux via **Ollama** ou des API externes comme **Gemini** et **OpenAI**.
+### API (Gemini / OpenAI)
+1. Récupérez votre clé ([Google AI Studio](https://aistudio.google.com/) ou [platform.openai.com](https://platform.openai.com/))
+2. Complétez le fichier `.env` :
+```
+GEMINI_API_KEY="VOTRE_CLÉ_GEMINI"
+OPENAI_API_KEY="VOTRE_CLÉ_OPENAI"
+```
+3. Les services concernés se trouvent dans le dossier `services/`
 
-### Utilisation avec Ollama (Local)
-
-Pour une utilisation en local, sans dépendre d'une connexion Internet pour l'analyse de texte :
-
-1.  **Installez Ollama** : Suivez les instructions sur [ollama.ai](https://ollama.ai/) pour l'installer sur votre système.
-2.  **Téléchargez un modèle** : Choisissez un modèle adapté à vos besoins (par exemple, `llama2`, `mistral`).
-    ```bash
-    ollama pull mistral
-    ```
-3.  **Configurez l'outil** : Assurez-vous que vos scripts (par exemple `qa_service.py`) sont configurés pour utiliser Ollama comme fournisseur de modèle.
-
-### Utilisation avec les API (Gemini et OpenAI)
-
-Pour utiliser des modèles plus puissants via leurs API :
-
-1.  **Obtenez vos clés d'API** :
-    *   **Gemini** : Créez un projet sur [Google AI Studio](https://aistudio.google.com/) et récupérez votre clé d'API.
-    *   **OpenAI** : Accédez à votre compte sur [platform.openai.com](https://platform.openai.com/) et générez une clé d'API.
-2.  **Configurez les variables d'environnement** : Pour des raisons de sécurité, ne codez pas vos clés en dur. Créez un fichier `.env` à la racine du projet et ajoutez-y vos clés :
-    ```
-    GEMINI_API_KEY="VOTRE_CLÉ_GEMINI"
-    OPENAI_API_KEY="VOTRE_CLÉ_OPENAI"
-    ```
-3.  **Adaptez le code** : Modifiez les services correspondants (par exemple `qa_service.py`, `summarization_service.py`) pour qu'ils utilisent la bibliothèque du fournisseur d'API souhaité (par exemple, `google-generativeai` pour Gemini, `openai` pour OpenAI).
-
-## 📂 Structure du Projet
-
+## 📂 Structure du projet
 ```
 .
-├── data/                # Dossier pour placer vos fichiers à analyser
-├── services/            # Contient la logique métier (transcription, QA, etc.)
-├── download_model.py    # Script pour télécharger le modèle de langue
-├── run.py               # Point d'entrée pour lancer l'application
-├── requirements.txt     # Liste des dépendances Python
-└── export.docx          # Fichier de sortie généré
+├── backend.py               # Application FastAPI (API, port 8000)
+├── main_streamlit.py        # Interface Streamlit (port 8501)
+├── run_streamlit.py         # Point d'entrée : lance FastAPI + Streamlit
+├── backend_streamlit.py     # Logique de l'interface
+├── utils_streamlit.py       # Utilitaires
+├── services/                # Logique métier (transcription, QA, résumé…)
+├── assets/                  # Ressources
+├── requirements_streamlit.txt
+├── .env.exemple             # Modèle de configuration des clés
+└── LICENSE.txt
 ```
 
 ## 📄 Licence
 
-Ce projet est distribué sous la licence spécifiée dans le fichier `LICENSE.txt`.
+Ce projet est distribué sous la licence MIT (voir `LICENSE.txt`).
