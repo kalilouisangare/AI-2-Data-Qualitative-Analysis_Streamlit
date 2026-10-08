@@ -22,8 +22,8 @@ Suivez ces étapes pour configurer l'environnement et lancer le projet.
 ### 2. Cloner le Dépôt
 
 ```bash
-git clone https://github.com/kalilouisangare/AI-2-Data-Qualitative-Analysis.git
-cd analyse_qualitative
+git clone https://github.com/kalilouisangare/AI-2-Data-Qualitative-Analysis_Streamlit
+cd AI-2-Data-Qualitative-Analysis_Streamlit
 ```
 
 ### 3. Créer et Activer l'Environnement Virtuel
